@@ -3,14 +3,17 @@ import useSwr from "swr";
 import { restBase } from "../constants";
 import { fetcher } from "../fetcher";
 import CityDetail from "./CityDetail";
+import {fetchData} from "../fakeApi";
 
 export default function CityList() {
   const [selectedCityId, setSelectedCityId] = useState();
   const [isPending, startTransition] = useTransition();
 
-  const { data: cities } = useSwr(`${restBase}/api/city`, fetcher, {
-    suspense: true,
-  });
+  // const { data: cities } = useSwr(`${restBase}/api/city`, fetcher, {
+  //   suspense: true,
+  // });
+  
+  const resource = fetchData();
 
   return (
     <Suspense fallback={<div>Loading CityShowData...</div>}>
@@ -32,11 +35,11 @@ export default function CityList() {
           );
         })}
       </div>
-      <CityDetail
-        selectedCityId={selectedCityId}
-        isPending={isPending}
-        cities={cities}
-      />
+      {/*<CityDetail*/}
+      {/*  selectedCityId={selectedCityId}*/}
+      {/*  isPending={isPending}*/}
+      {/*  cities={cities}*/}
+      {/*/>*/}
     </Suspense>
   );
 }
